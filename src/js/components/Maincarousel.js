@@ -48,7 +48,7 @@ class MainCarousel extends Component {
           }
         },
         {
-          breakpoint: 1023,
+          breakpoint: 1921,
           settings: {
             dots: true,
             centerMode: true,
@@ -57,6 +57,7 @@ class MainCarousel extends Component {
             arrows: true,
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
+            slidesToShow: 1,
             slidesToScroll: 1
           }
         }
@@ -69,11 +70,13 @@ class MainCarousel extends Component {
         <Slider {...settings}>
           {this.state.videos.map(video =>
             <div key={video.mediaid}>
-              <a href={video.link}><PlayIcon className="playIcon"/></a>
+              <a className="play" href={video.link}></a>
               <img src={video.image}/>
               <div className="content-block">
-                <h2 className="mainTitle">{video.title}</h2>
-                <p className="description">{video.description}</p>
+                <div className="content">
+                  <h2 className="mainTitle">{video.title}</h2>
+                  <p className="description">{video.description}</p>
+                </div>
               </div>
             </div>
           )}

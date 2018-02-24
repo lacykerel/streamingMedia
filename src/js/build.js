@@ -19891,7 +19891,7 @@ var MainCarousel = function (_Component) {
             dots: true
           }
         }, {
-          breakpoint: 1023,
+          breakpoint: 1921,
           settings: {
             dots: true,
             centerMode: true,
@@ -19900,6 +19900,7 @@ var MainCarousel = function (_Component) {
             arrows: true,
             nextArrow: _react2.default.createElement(NextArrow, null),
             prevArrow: _react2.default.createElement(PrevArrow, null),
+            slidesToShow: 1,
             slidesToScroll: 1
           }
         }]
@@ -19916,24 +19917,24 @@ var MainCarousel = function (_Component) {
             return _react2.default.createElement(
               'div',
               { key: video.mediaid },
-              _react2.default.createElement(
-                'a',
-                { href: video.link },
-                _react2.default.createElement(_play2.default, { className: 'playIcon' })
-              ),
+              _react2.default.createElement('a', { className: 'play', href: video.link }),
               _react2.default.createElement('img', { src: video.image }),
               _react2.default.createElement(
                 'div',
                 { className: 'content-block' },
                 _react2.default.createElement(
-                  'h2',
-                  { className: 'mainTitle' },
-                  video.title
-                ),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'description' },
-                  video.description
+                  'div',
+                  { className: 'content' },
+                  _react2.default.createElement(
+                    'h2',
+                    { className: 'mainTitle' },
+                    video.title
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'description' },
+                    video.description
+                  )
                 )
               )
             );
