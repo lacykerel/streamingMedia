@@ -29,8 +29,6 @@ class CategoryCarousel extends Component {
     }
   }
 
-
-
   componentDidMount(props) {
     axios.get(`https://cdn.jwplayer.com/v2/playlists/f49AJ8N4?tags=${this.props.tag}`)
       .then(res => {
