@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Slider from 'react-slick';
 import axios from 'axios';
-import PlayIcon from '../../img/play.svg';
+import Slider from 'react-slick';
 import NextIcon from '../../img/arrow-right.svg';
 import PrevIcon from '../../img/arrow-left.svg';
 
@@ -18,7 +17,7 @@ function PrevArrow(props) {
   )
 }
 
-class MainCarousel extends Component {
+class CategoryCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,10 +26,20 @@ class MainCarousel extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://content.jwplatform.com/feeds/f49AJ8N4.json?page_limit=4')
+    axios.get('https://content.jwplatform.com/feeds/f49AJ8N4.json')
       .then(res => {
         const videos = res.data.playlist;
-        this.setState({ videos });
+        console.log(videos, 'videos')
+        const tags = res.data.playlist.map(video => video.tags)
+        let filteredTag = ''
+        for(let key in tags) {
+          filteredTag = (tags[key].split(','));
+          filteredTag.forEach(function(tag) {
+            if(tag === 'drama') {
+              console.log(videos.filter(video => tags[key]));
+            }
+          })
+        }
       });
   }
 
@@ -49,27 +58,22 @@ class MainCarousel extends Component {
         {
           breakpoint: 1921,
           settings: {
-            dots: true,
-            centerMode: true,
-            centerPadding: '260px',
             speed: 500,
             arrows: true,
             nextArrow: <NextArrow/>,
             prevArrow: <PrevArrow/>,
-            slidesToShow: 1,
+            slidesToShow: 4,
             slidesToScroll: 1
           }
         }
       ],
 
     };
-
     return (
-      <div className="mainCarousel">
+      <div className="category-carousel">
         <Slider {...settings}>
-          {this.state.videos.map(video =>
+          {this.state.videos.filter(video => video.tags === 'drama').map(video =>
             <div key={video.mediaid}>
-              <a className="play" href={video.link}></a>
               <img src={video.image}/>
               <div className="content-block">
                 <div className="content">
@@ -85,6 +89,4 @@ class MainCarousel extends Component {
   }
 }
 
-
-
-export default MainCarousel;
+export default CategoryCarousel;
