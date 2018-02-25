@@ -43,15 +43,7 @@ module.exports = function(grunt) {
         }
       }
     },
-
-    // // lint js
-    // jshint: {
-    //   options: {
-    //     report: require('jshint-stylish')
-    //   },
-    //   dev: ['<%= project.dev %>/js/**/*.js', '<%= project.dev %>/js/build.js']
-    // },
-
+    
     // webpack
     webpack: {
       build: {

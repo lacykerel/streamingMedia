@@ -24,6 +24,7 @@
     "jshint-stylish": "^2.2.1",
     "load-grunt-tasks": "^3.5.2",
     "raw-loader": "^0.5.1",
+    "react-ellipsis-text": "^1.0.0",
     "react-slick": "^0.18.1",
     "slick-carousel": "^1.8.1",
     "svg-react-loader": "^0.4.5",

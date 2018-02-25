@@ -38,7 +38,16 @@ class MainCarousel extends Component {
     const settings = {
       responsive: [
         {
-          breakpoint: 768,
+          breakpoint: 769,
+          settings: {
+            arrows: false,
+            centerMode: false,
+            slidesToShow: 1,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 1024,
           settings: {
             arrows: false,
             centerMode: false,
@@ -69,8 +78,10 @@ class MainCarousel extends Component {
         <Slider {...settings}>
           {this.state.videos.map(video =>
             <div key={video.mediaid}>
-              <a className="play" href={video.link}></a>
-              <img src={video.image}/>
+              <div className="play-image-contain">
+                <a className="play" href={video.link}></a>
+                <img src={video.image}/>
+              </div>
               <div className="content-block">
                 <div className="content">
                   <h2 className="mainTitle">{video.title}</h2>
