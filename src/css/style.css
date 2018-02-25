@@ -143,6 +143,7 @@ header {
 }
 .slick-slide img {
   width: 100%;
+  height: 100%;
 }
 .content {
   padding: 20px;
@@ -177,10 +178,6 @@ header {
   width: 150%;
 }
 @media screen and (min-width: 1024px) {
-  .slick-slider .slick-slide {
-    height: 480px !important;
-    position: relative;
-  }
   .play {
     background-image: url('../img/play.svg');
     background-repeat: no-repeat;
@@ -219,16 +216,71 @@ header {
   .slick-slide img {
     object-fit: cover;
   }
-  .content-block {
+  .main-carousel .slick-slider .slick-slide {
+    height: 480px !important;
+    position: relative;
+  }
+  .main-carousel .content-block {
     bottom: 0;
     padding: 50px;
     position: absolute;
   }
-  .content-block .mainTitle {
+  .main-carousel .content-block .main-title {
     font-size: 42px;
     margin-bottom: 0.5em;
   }
-  .content-block .description {
+  .main-carousel .content-block .description {
     font-size: 1em;
+  }
+  .category-carousel .slick-prev {
+    left: -65px;
+  }
+  .category-carousel .slick-prev .iconArrow {
+    color: #333;
+  }
+  .category-carousel .slick-next {
+    right: -55px;
+  }
+  .category-contain {
+    background-color: #191a1c;
+    border-bottom: 1px solid #040405;
+    padding: 3em 6em;
+  }
+  .category-contain h2 {
+    font-size: 21px;
+    font-weight: normal;
+    margin-bottom: 12px;
+  }
+  .category-carousel .content-block {
+    background-color: #333;
+  }
+  .category-carousel .content {
+    height: 32px;
+    padding: 10px;
+  }
+  .category-carousel .title {
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 0;
+  }
+  .category-carousel .description {
+    display: none;
+    font-size: 12px;
+  }
+  .category-carousel .slick-slide .content-block:hover {
+    height: 312px;
+    max-height: 135%;
+    overflow: scroll;
+    position: absolute;
+    top: 0;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  }
+  .category-carousel .slick-slide .content-block:hover .content .title {
+    margin-bottom: 10px;
+  }
+  .category-carousel .slick-slide .content-block:hover .content .description {
+    display: block;
   }
 }

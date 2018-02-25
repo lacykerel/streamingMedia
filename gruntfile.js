@@ -20,7 +20,6 @@ module.exports = function(grunt) {
           port: 9000,
           base: '<%= project.dev %>',
         }
-
       },
     },
 
@@ -29,17 +28,10 @@ module.exports = function(grunt) {
       styles: {
         files: ['<%= project.dev %>/less/**/*.less'],
         tasks: ['less:dev'],
-        options: {
-          livereload: true
-        }
       },
       scripts: {
         files: ['<%= project.dev %>/js/**/*.js', 'gruntfile.js'],
-        tasks: ['webpack:build', 'jshint:dev', 'less:dev'],
-        options: {
-          livereload: true,
-          reload: true
-        }
+        tasks: ['webpack:build', 'less:dev'],
       }
     },
 
@@ -52,13 +44,13 @@ module.exports = function(grunt) {
       }
     },
 
-    // lint js
-    jshint: {
-      options: {
-        report: require('jshint-stylish')
-      },
-      dev: ['<%= project.dev %>/js/**/*.js', '<%= project.dev %>/js/build.js']
-    },
+    // // lint js
+    // jshint: {
+    //   options: {
+    //     report: require('jshint-stylish')
+    //   },
+    //   dev: ['<%= project.dev %>/js/**/*.js', '<%= project.dev %>/js/build.js']
+    // },
 
     // webpack
     webpack: {
@@ -76,7 +68,7 @@ module.exports = function(grunt) {
         storeStatsTo: 'webpackStats',
         progress: true,
         failOnError: true,
-        watch: true,
+        watch: false,
         module: {
           loaders: [
             { test: /\.svg$/, use: 'svg-react-loader'},
@@ -97,5 +89,4 @@ module.exports = function(grunt) {
 
   // tasks
   grunt.registerTask('default', ['connect', 'watch']);
-  // grunt.registerTask('develop', ['connect:server']);
 };

@@ -9,7 +9,9 @@ ReactDOM.render(
   <div>
     <Header/>
     <MainCarousel/>
-    <CategoryCarousel/>
+    <CategoryCarousel tag='drama' title='Dramas'/>
+    <CategoryCarousel tag='comedy' title='Comedies'/>
+    <CategoryCarousel tag='thriller' title='Thrillers'/>
   </div>
 
 , document.querySelector('.app'));

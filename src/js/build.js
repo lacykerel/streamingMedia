@@ -2507,7 +2507,9 @@ _reactDom2.default.render(_react2.default.createElement(
   null,
   _react2.default.createElement(_Header2.default, null),
   _react2.default.createElement(_Maincarousel2.default, null),
-  _react2.default.createElement(_CategoryCarousel2.default, null)
+  _react2.default.createElement(_CategoryCarousel2.default, { tag: 'drama', title: 'Dramas' }),
+  _react2.default.createElement(_CategoryCarousel2.default, { tag: 'comedy', title: 'Comedies' }),
+  _react2.default.createElement(_CategoryCarousel2.default, { tag: 'thriller', title: 'Thrillers' })
 ), document.querySelector('.app'));
 
 /***/ }),
@@ -19930,7 +19932,7 @@ var MainCarousel = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('https://content.jwplatform.com/feeds/f49AJ8N4.json?page_limit=4').then(function (res) {
+      _axios2.default.get('https://content.jwplatform.com/feeds/f49AJ8N4.json?page_limit=4&poster_width=1280').then(function (res) {
         var videos = res.data.playlist;
         _this2.setState({ videos: videos });
       });
@@ -19940,7 +19942,7 @@ var MainCarousel = function (_Component) {
     value: function render() {
       var settings = {
         responsive: [{
-          breakpoint: 480,
+          breakpoint: 768,
           settings: {
             arrows: false,
             centerMode: false,
@@ -19966,7 +19968,7 @@ var MainCarousel = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'mainCarousel' },
+        { className: 'main-carousel' },
         _react2.default.createElement(
           _reactSlick2.default,
           settings,
@@ -23703,37 +23705,35 @@ var CategoryCarousel = function (_Component) {
 
   _createClass(CategoryCarousel, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      _axios2.default.get('https://content.jwplatform.com/feeds/f49AJ8N4.json').then(function (res) {
+    value: function componentDidMount(props) {
+      var _this2 = this;
+
+      _axios2.default.get('https://cdn.jwplayer.com/v2/playlists/f49AJ8N4?tags=' + this.props.tag).then(function (res) {
         var videos = res.data.playlist;
-        console.log(videos, 'videos');
-        var tags = res.data.playlist.map(function (video) {
-          return video.tags;
-        });
-        var filteredTag = '';
-
-        var _loop = function _loop(key) {
-          filteredTag = tags[key].split(',');
-          filteredTag.forEach(function (tag) {
-            if (tag === 'drama') {
-              console.log(videos.filter(function (video) {
-                return tags[key];
-              }));
-            }
-          });
-        };
-
-        for (var key in tags) {
-          _loop(key);
-        }
+        _this2.setState({ videos: videos });
+        // const filteredVideos = videos.map(video => video.tags);
+        // console.log(filteredVideos, 'filteredVideos');
+        // const tags = res.data.playlist.map(video => video.tags)
+        // console.log(tags, 'tags');
+        // let filteredTag = ''
+        // for(let key in tags) {
+        //   filteredTag = (tags[key].split(','));
+        //   filteredTag.forEach(function(tag) {
+        //     if(tag === 'drama') {
+        //
+        //     }
+        //   })
+        // }
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      var videos = this.state.videos;
+
       var settings = {
         responsive: [{
-          breakpoint: 480,
+          breakpoint: 768,
           settings: {
             arrows: false,
             centerMode: false,
@@ -23755,37 +23755,44 @@ var CategoryCarousel = function (_Component) {
       };
       return _react2.default.createElement(
         'div',
-        { className: 'category-carousel' },
+        { className: 'category-contain' },
         _react2.default.createElement(
-          _reactSlick2.default,
-          settings,
-          this.state.videos.filter(function (video) {
-            return video.tags === 'drama';
-          }).map(function (video) {
-            return _react2.default.createElement(
-              'div',
-              { key: video.mediaid },
-              _react2.default.createElement('img', { src: video.image }),
-              _react2.default.createElement(
+          'h2',
+          null,
+          this.props.title
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'category-carousel' },
+          _react2.default.createElement(
+            _reactSlick2.default,
+            settings,
+            videos.map(function (video) {
+              return _react2.default.createElement(
                 'div',
-                { className: 'content-block' },
+                { key: video.mediaid },
+                _react2.default.createElement('img', { src: video.image }),
                 _react2.default.createElement(
                   'div',
-                  { className: 'content' },
+                  { className: 'content-block' },
                   _react2.default.createElement(
-                    'h2',
-                    { className: 'mainTitle' },
-                    video.title
-                  ),
-                  _react2.default.createElement(
-                    'p',
-                    { className: 'description' },
-                    video.description
+                    'div',
+                    { className: 'content' },
+                    _react2.default.createElement(
+                      'p',
+                      { className: 'title' },
+                      video.title
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      { className: 'description' },
+                      video.description
+                    )
                   )
                 )
-              )
-            );
-          })
+              );
+            })
+          )
         )
       );
     }

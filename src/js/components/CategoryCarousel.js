@@ -25,29 +25,33 @@ class CategoryCarousel extends Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('https://content.jwplatform.com/feeds/f49AJ8N4.json')
+  componentDidMount(props) {
+    axios.get(`https://cdn.jwplayer.com/v2/playlists/f49AJ8N4?tags=${this.props.tag}`)
       .then(res => {
         const videos = res.data.playlist;
-        console.log(videos, 'videos')
-        const tags = res.data.playlist.map(video => video.tags)
-        let filteredTag = ''
-        for(let key in tags) {
-          filteredTag = (tags[key].split(','));
-          filteredTag.forEach(function(tag) {
-            if(tag === 'drama') {
-              console.log(videos.filter(video => tags[key]));
-            }
-          })
-        }
+        this.setState({ videos });
+        // const filteredVideos = videos.map(video => video.tags);
+        // console.log(filteredVideos, 'filteredVideos');
+        // const tags = res.data.playlist.map(video => video.tags)
+        // console.log(tags, 'tags');
+        // let filteredTag = ''
+        // for(let key in tags) {
+        //   filteredTag = (tags[key].split(','));
+        //   filteredTag.forEach(function(tag) {
+        //     if(tag === 'drama') {
+        //
+        //     }
+        //   })
+        // }
       });
   }
 
   render() {
+    const { videos } = this.state;
     const settings = {
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 768,
           settings: {
             arrows: false,
             centerMode: false,
@@ -70,20 +74,23 @@ class CategoryCarousel extends Component {
 
     };
     return (
-      <div className="category-carousel">
-        <Slider {...settings}>
-          {this.state.videos.filter(video => video.tags === 'drama').map(video =>
-            <div key={video.mediaid}>
-              <img src={video.image}/>
-              <div className="content-block">
-                <div className="content">
-                  <h2 className="mainTitle">{video.title}</h2>
-                  <p className="description">{video.description}</p>
+      <div className="category-contain">
+        <h2>{this.props.title}</h2>
+        <div className="category-carousel">
+          <Slider {...settings}>
+            {videos.map(video =>
+              <div key={video.mediaid}>
+                <img src={video.image}/>
+                <div className="content-block">
+                  <div className="content">
+                    <p className="title">{video.title}</p>
+                    <p className="description">{video.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </Slider>
+            )}
+          </Slider>
+        </div>
       </div>
     )
   }

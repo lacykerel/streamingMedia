@@ -27,7 +27,7 @@ class MainCarousel extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://content.jwplatform.com/feeds/f49AJ8N4.json?page_limit=4')
+    axios.get('https://content.jwplatform.com/feeds/f49AJ8N4.json?page_limit=4&poster_width=1280')
       .then(res => {
         const videos = res.data.playlist;
         this.setState({ videos });
@@ -38,7 +38,7 @@ class MainCarousel extends Component {
     const settings = {
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 768,
           settings: {
             arrows: false,
             centerMode: false,
@@ -65,7 +65,7 @@ class MainCarousel extends Component {
     };
 
     return (
-      <div className="mainCarousel">
+      <div className="main-carousel">
         <Slider {...settings}>
           {this.state.videos.map(video =>
             <div key={video.mediaid}>
