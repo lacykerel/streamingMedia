@@ -1,12 +1,8 @@
+// Main Carousel
+
 .main-carousel {
   border-bottom: 1px solid #222;
-}
-
-.slick-slide {
-  height: 100%;
-  position: relative;
-  img {
-    width: 100%;
+  .slick-slide img {
     @media screen and (min-width: 400px) and (max-width: 540px) {
       height: 300px;
       object-fit: cover;
@@ -14,35 +10,30 @@
     @media screen and (min-width: 541px) and (max-width: 768px) {
       height: 400px;
     }
+    @media screen and (min-width: 1024px) {
+      height: 520px;
+    }
+    @media screen and (min-width: 1920px) {
+      height: 600px;
+    }
+    @media screen and (min-width: 2560) {
+      height: 900px;
+    }
+  }
+}
+
+// Slider
+
+.slick-slide {
+  height: 100%;
+  position: relative;
+  img {
+    width: 100%;
   }
 }
 
 .slick-slider {
   padding-bottom: 1em;
-}
-
-.content {
-  padding: 20px;
-  position: relative;
-  .mainTitle {
-    font-size: 24px;
-    margin-bottom: 1em;
-  }
-}
-
-.play-image-contain {
-  position: relative;
-}
-
-.play {
-  background-image: url('../img/play.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
-  height: 6em;
-  position: absolute;
-  width: 6em;
-  .center();
 }
 
 .slick-prev, .slick-next {
@@ -69,9 +60,31 @@
   width: 150%;
 }
 
-.tool-menu {
-  display: none;
+.content {
+  padding: 20px;
+  position: relative;
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 1em;
+  }
 }
+
+.play-image-contain {
+  position: relative;
+}
+
+.play {
+  background-image: url('../img/play.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 6em;
+  position: absolute;
+  width: 6em;
+  .center();
+}
+
+// Category Carousels
 
 .category-contain {
   padding: 20px;
@@ -87,9 +100,11 @@
 .tool-menu {
   background-color: #222;
   border-radius: 2px;
+  display: none;
   right: 2.5em;
   top: 15px;
   width: 200px;
+  z-index: 2;
   &:after {
     content: "";
     border-top: 10px solid transparent;
@@ -102,39 +117,42 @@
     width: 0;
     z-index: 2;
   }
-  ul {
-    position: relative;
-    z-index: 4;
-    li {
-      border-bottom: 1px solid #000;
-      list-style: none;
-      padding: 10px;
-      &:after {
-        content: "";
-        background-color: #111;
-        height: 1px;
-        left: 0;
-        position: relative;
-        top: 37px;
-        width: 100%;
-      }
-      &:last-child {
-        border: none;
-      }
-      &:hover {
-        background-color: #000;
-      }
-      a {
-        color: #fff;
-        display: block;
-        font-size: 12px;
-        text-decoration: none;
-      }
-    }
-  }
+
   &.open {
     display: block;
     position: absolute;
+  }
+}
+
+.tool-menu ul {
+  position: relative;
+  z-index: 4;
+
+  li {
+    border-bottom: 1px solid #000;
+    list-style: none;
+    padding: 10px;
+    &:after {
+      content: "";
+      background-color: #111;
+      height: 1px;
+      left: 0;
+      position: relative;
+      top: 37px;
+      width: 100%;
+    }
+    &:last-child {
+      border: none;
+    }
+    &:hover {
+      background-color: #000;
+    }
+    a {
+      color: #fff;
+      display: block;
+      font-size: 12px;
+      text-decoration: none;
+    }
   }
 }
 
@@ -154,8 +172,11 @@
 // Start Responsive
 
 @media screen and (min-width: 1024px) {
+  .main-carousel .slick-dots {
+    bottom: 55px;
+  }
 
-  // Slider attributes
+  // Slider
   .slick-prev {
     left: 36px;
     z-index: 9;
@@ -168,11 +189,6 @@
   }
   .slick-prev:before {
     display: none;
-  }
-
-  // Main Carousel
-  .main-carousel .slick-slider .slick-slide img {
-    height: 300px;
   }
 
   // Category Carousel
@@ -203,7 +219,8 @@
   .category-contain {
     background-color: #191a1c;
     border-bottom: 1px solid #040405;
-    padding: 3em 6em;
+    padding: 1em 6em 0;
+
     h2 {
       font-size: 21px;
       font-weight: normal;
@@ -230,27 +247,14 @@
     }
   }
 
-
   .category-carousel .slick-slide .content-block {
-    &:hover {
-        height: 312px;
-        max-height: 132%;
-        position: absolute;
-        top: 0;
-        transition-property: all;
-        transition-duration: .5s;
-        transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-        .content {
-          .title {
-            margin-bottom: 10px;
-          }
-          .description {
-            display: block;
-          }
-        }
-        .tool-menu {
-          display: none;
-        }
+    &.show {
+      .content .title {
+        margin-bottom: 10px;
+      }
+      .content .description {
+          display: block;
+      }
     }
   }
 }
@@ -259,16 +263,24 @@
   .main-carousel {
     .content-block {
       bottom: 0;
-      padding: 50px;
+      padding: 50px 20px;
       position: absolute;
 
       .main-title {
         font-size: 42px;
+        font-weight: normal;
         margin-bottom: 0.5em;
       }
       .description {
-        font-size: 1em;
+        font-size: 14px;
+        width: 80%;
       }
     }
+  }
+
+  .main-carousel .play {
+    height: 8em;
+    top: 30%;
+    width: 8em;
   }
 }

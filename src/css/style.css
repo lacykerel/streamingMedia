@@ -146,6 +146,32 @@ header {
 .main-carousel {
   border-bottom: 1px solid #222;
 }
+@media screen and (min-width: 400px) and (max-width: 540px) {
+  .main-carousel .slick-slide img {
+    height: 300px;
+    object-fit: cover;
+  }
+}
+@media screen and (min-width: 541px) and (max-width: 768px) {
+  .main-carousel .slick-slide img {
+    height: 400px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .main-carousel .slick-slide img {
+    height: 520px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .main-carousel .slick-slide img {
+    height: 600px;
+  }
+}
+@media screen and (min-width: 2560) {
+  .main-carousel .slick-slide img {
+    height: 900px;
+  }
+}
 .slick-slide {
   height: 100%;
   position: relative;
@@ -153,42 +179,8 @@ header {
 .slick-slide img {
   width: 100%;
 }
-@media screen and (min-width: 400px) and (max-width: 540px) {
-  .slick-slide img {
-    height: 300px;
-    object-fit: cover;
-  }
-}
-@media screen and (min-width: 541px) and (max-width: 768px) {
-  .slick-slide img {
-    height: 400px;
-  }
-}
 .slick-slider {
   padding-bottom: 1em;
-}
-.content {
-  padding: 20px;
-  position: relative;
-}
-.content .mainTitle {
-  font-size: 24px;
-  margin-bottom: 1em;
-}
-.play-image-contain {
-  position: relative;
-}
-.play {
-  background-image: url('../img/play.svg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
-  height: 6em;
-  width: 6em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .slick-prev,
 .slick-next {
@@ -210,8 +202,28 @@ header {
 .iconArrow {
   width: 150%;
 }
-.tool-menu {
-  display: none;
+.content {
+  padding: 20px;
+  position: relative;
+}
+.content .main-title {
+  font-size: 24px;
+  margin-bottom: 1em;
+}
+.play-image-contain {
+  position: relative;
+}
+.play {
+  background-image: url('../img/play.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 6em;
+  width: 6em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .category-contain {
   padding: 20px;
@@ -225,9 +237,11 @@ header {
 .tool-menu {
   background-color: #222;
   border-radius: 2px;
+  display: none;
   right: 2.5em;
   top: 15px;
   width: 200px;
+  z-index: 2;
 }
 .tool-menu:after {
   content: "";
@@ -240,6 +254,10 @@ header {
   top: 8px;
   width: 0;
   z-index: 2;
+}
+.tool-menu.open {
+  display: block;
+  position: absolute;
 }
 .tool-menu ul {
   position: relative;
@@ -271,10 +289,6 @@ header {
   font-size: 12px;
   text-decoration: none;
 }
-.tool-menu.open {
-  display: block;
-  position: absolute;
-}
 .category-carousel .slick-slide .video-tooltip {
   background-image: url('../img/menu.png');
   background-repeat: no-repeat;
@@ -288,6 +302,9 @@ header {
   width: 25px;
 }
 @media screen and (min-width: 1024px) {
+  .main-carousel .slick-dots {
+    bottom: 55px;
+  }
   .slick-prev {
     left: 36px;
     z-index: 9;
@@ -300,9 +317,6 @@ header {
   }
   .slick-prev:before {
     display: none;
-  }
-  .main-carousel .slick-slider .slick-slide img {
-    height: 300px;
   }
   .category-carousel .slick-prev {
     left: -65px;
@@ -324,7 +338,7 @@ header {
   .category-contain {
     background-color: #191a1c;
     border-bottom: 1px solid #040405;
-    padding: 3em 6em;
+    padding: 1em 6em 0;
   }
   .category-contain h2 {
     font-size: 21px;
@@ -347,36 +361,31 @@ header {
     display: none;
     font-size: 12px;
   }
-  .category-carousel .slick-slide .content-block:hover {
-    height: 312px;
-    max-height: 132%;
-    position: absolute;
-    top: 0;
-    transition-property: all;
-    transition-duration: .5s;
-    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-  }
-  .category-carousel .slick-slide .content-block:hover .content .title {
+  .category-carousel .slick-slide .content-block.show .content .title {
     margin-bottom: 10px;
   }
-  .category-carousel .slick-slide .content-block:hover .content .description {
+  .category-carousel .slick-slide .content-block.show .content .description {
     display: block;
-  }
-  .category-carousel .slick-slide .content-block:hover .tool-menu {
-    display: none;
   }
 }
 @media screen and (min-width: 1280px) {
   .main-carousel .content-block {
     bottom: 0;
-    padding: 50px;
+    padding: 50px 20px;
     position: absolute;
   }
   .main-carousel .content-block .main-title {
     font-size: 42px;
+    font-weight: normal;
     margin-bottom: 0.5em;
   }
   .main-carousel .content-block .description {
-    font-size: 1em;
+    font-size: 14px;
+    width: 80%;
+  }
+  .main-carousel .play {
+    height: 8em;
+    top: 30%;
+    width: 8em;
   }
 }

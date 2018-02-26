@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
 import Menu from './Menu';
+import ContentBlock from './ContentBlock';
+import EllipsisText  from 'react-ellipsis-text';
 import NextIcon from '../../img/arrow-right.svg';
 import PrevIcon from '../../img/arrow-left.svg';
-import EllipsisText  from 'react-ellipsis-text';
-
 
 function NextArrow(props) {
   const {onClick, className} = props;
@@ -21,22 +21,20 @@ function PrevArrow(props) {
 }
 
 class CategoryCarousel extends Component {
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
     this.state = {
-      videos: [],
+      videos: []
     }
   }
 
-  componentDidMount(props) {
+  componentDidMount() {
     axios.get(`https://cdn.jwplayer.com/v2/playlists/f49AJ8N4?tags=${this.props.tag}`)
       .then(res => {
         const videos = res.data.playlist;
         this.setState({ videos });
       });
   }
-
 
   render() {
     const { videos } = this.state;
@@ -61,7 +59,7 @@ class CategoryCarousel extends Component {
           }
         },
         {
-          breakpoint: 1921,
+          breakpoint: 2561,
           settings: {
             speed: 500,
             arrows: true,
@@ -72,8 +70,8 @@ class CategoryCarousel extends Component {
           }
         }
       ],
-
     };
+
     return (
       <div className="category-contain">
         <h2>{this.props.title}</h2>
@@ -82,15 +80,10 @@ class CategoryCarousel extends Component {
             {videos.map(video =>
               <div key={video.mediaid}>
                 <div className="slide-container">
-                <Menu/>
-                <img src={video.image}/>
-                <div className="content-block">
-                  <div className="content">
-                    <p className="title">{video.title}</p>
-                    <EllipsisText className="description" text={video.description} length={250} />
-                  </div>
+                    <Menu/>
+                    <img src={video.image}/>
+                    <ContentBlock title={video.title} description={video.description} />
                 </div>
-              </div>
               </div>
             )}
           </Slider>

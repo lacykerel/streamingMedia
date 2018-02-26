@@ -1,6 +1,4 @@
 module.exports = function(grunt) {
-  // time grunt tasks
-  require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
@@ -43,7 +41,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    
+
     // webpack
     webpack: {
       build: {
@@ -57,7 +55,6 @@ module.exports = function(grunt) {
           modules: true,
           reasons: true
         },
-        storeStatsTo: 'webpackStats',
         progress: true,
         failOnError: true,
         watch: false,

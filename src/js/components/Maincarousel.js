@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
-import PlayIcon from '../../img/play.svg';
 import NextIcon from '../../img/arrow-right.svg';
 import PrevIcon from '../../img/arrow-left.svg';
 
 function NextArrow(props) {
-  const {onClick, className} = props;
+  const {onClick} = props;
   return (
     <button className="slick-arrow slick-next" onClick={onClick}><NextIcon className="iconArrow"/></button>
   );
 }
 function PrevArrow(props) {
-  const {onClick, className} = props;
+  const {onClick} = props;
   return (
     <button className="slick-arrow slick-prev" onClick={onClick}><PrevIcon className="iconArrow"/></button>
   )
 }
 
 class MainCarousel extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       videos: []
     }
   }
 
   componentDidMount() {
-    axios.get('https://content.jwplatform.com/feeds/f49AJ8N4.json?page_limit=4&poster_width=1280')
+    axios.get('https://cdn.jwplayer.com/v2/playlists/f49AJ8N4?post_width=1920&page_limit=4')
       .then(res => {
         const videos = res.data.playlist;
         this.setState({ videos });
@@ -47,7 +46,7 @@ class MainCarousel extends Component {
           }
         },
         {
-          breakpoint: 1024,
+          breakpoint: 1280,
           settings: {
             arrows: false,
             centerMode: false,
@@ -60,7 +59,7 @@ class MainCarousel extends Component {
           settings: {
             dots: true,
             centerMode: true,
-            centerPadding: '260px',
+            centerPadding: '215px',
             speed: 500,
             arrows: true,
             nextArrow: <NextArrow/>,
@@ -68,9 +67,22 @@ class MainCarousel extends Component {
             slidesToShow: 1,
             slidesToScroll: 1
           }
+        },
+        {
+          breakpoint: 2561,
+          settings: {
+            dots: true,
+            centerMode: true,
+            centerPadding: '360px',
+            arrows: true,
+            nextArrow: <NextArrow/>,
+            prevArrow: <PrevArrow/>,
+            slidesToShow: 1,
+            slidesToScroll: 1
+
+          }
         }
       ],
-
     };
 
     return (
@@ -84,7 +96,7 @@ class MainCarousel extends Component {
               </div>
               <div className="content-block">
                 <div className="content">
-                  <h2 className="mainTitle">{video.title}</h2>
+                  <h2 className="main-title">{video.title}</h2>
                   <p className="description">{video.description}</p>
                 </div>
               </div>
@@ -95,7 +107,6 @@ class MainCarousel extends Component {
     )
   }
 }
-
 
 
 export default MainCarousel;
